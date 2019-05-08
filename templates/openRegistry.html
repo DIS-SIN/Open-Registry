@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="../../static/css/materialize.min.css"  media="screen,projection"/>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Open Registry</h1>
+        <br>
+        <form id="form">
+            <div class="input-field">
+                <h5>Content URL</h5>
+                <!-- The form validation has been removed for now because it was inconsistent (it would 
+                    work on a submission but not the next one) -->
+                <!-- <input id="content_URL" type="text" name="url" placeholder="Paste your content URL here." required
+                    pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"> -->
+                <input id="content_URL" type="text" name="url" placeholder="Paste your content URL here.">
+            </div>
+            <div>
+                <h5>Categories</h5>
+                <p>Select which categories the content belongs to.</p>
+                <p>
+                    <label for="0001">
+                    <input id="0001" name="category" type="checkbox" value="Leadership" />
+                    <span>Leadership</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="0002">
+                    <input id="0002" name="category" type="checkbox" value="Design"/>
+                    <span>Design</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="0003">
+                    <input id="0003" name="category" type="checkbox" value="Data Analysis"/>
+                    <span>Data Analysis</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="0004">
+                    <input id="0004" name="category" type="checkbox" value="Digital Government"/>
+                    <span>Digital Government</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="0005">
+                    <input id="0005" name="category" type="checkbox" value="AI / Machine Learning"/>
+                    <span>AI / Machine Learning</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="0006">
+                    <input id="0006" name="category" type="checkbox" value="DevOps"/>
+                    <span>DevOps</span>
+                    </label>
+                </p>
+            </div>
+            <button id="btnSubmit" class="btn waves-effect" type="submit">Submit</button>
+        </form>
+    </div>
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="../../static/js/materialize.min.js"></script>
+<script type="text/javascript">
+
+(function ($) {
+    $(function () {
+        // From https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+        function postData(url, data) {
+            return fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }).then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+            });
+        }
+
+        function submitContent() {
+            var url = $("#content_URL").val();
+            // List the values of every checked box with the name 'category'
+            var categories = [];
+            $.each($("input[name='category']:checked"), function() {
+                categories.push($(this).val());
+            })
+            postData('http://localhost:5000', {
+                "url": url,
+                "categories": categories
+                // any additional data can be added here
+            })
+            .then(data => {
+                // Is 'payload' even the right term?
+                var payload = JSON.stringify(data);
+                alert(payload); // shows the payload in an alert for development purpose. This is temporary
+                console.log(payload);
+            })
+            .catch(error => console.error(error))
+
+            // TODO: I feel like clearing the form is necessary in case someone wants to submit something else after
+            // or it might NOT be necessary if we intend to redirect the user to another page anyway
+            .then(document.getElementById("form").reset())
+            // TODO: add some kind of confirmation that the content has been submitted. Probably more complex than this:
+            .then(alert("Your content has been successfully submitted."));
+        }
+
+        $("#btnSubmit").on("click",function(){
+            submitContent();
+        });
+    });
+})(jQuery);
+</script>
+</body>
+</html>
