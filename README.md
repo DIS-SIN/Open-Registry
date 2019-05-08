@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/DOL-SOCRATES-red.svg??link=https://github.com/DIS-SIN/DigitalOpenLearning/wiki/DOL-Components-and-Epics//left&link=https://github.com/DIS-SIN/DigitalOpenLearning/wiki/DOL-Components-and-Epics//right)
+![](https://img.shields.io/badge/DOL-SOCRATES-red.svg??link=https://github.com/DIS-SIN/DigitalOpenLearning/wiki/DOL-Components-and-Epics)
 # "How to put things in DOL. How do I track learning."
 
 Paste link to submit to DOL. Adds new content. Tracks learning on consumed content. Connects to ENGINE.
