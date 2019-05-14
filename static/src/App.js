@@ -1,5 +1,4 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
 
 const la_streams = [
@@ -12,14 +11,6 @@ const la_streams = [
 ];
 
 const ControlStreamSelector = () => {
-  /**
-   * <p>
-      <label for={"ctrl_stream_sel_" + index}>
-        <input id={"ctrl_stream_sel_" + index} name="la_stream" type="checkbox" value={item.stream} />
-        <span>{item.stream}</span>
-      </label>
-    </p>
-   */
   const ctrl = la_streams.map((item, index) => (
     <label key={"ctrl_stream_" + index} className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor={"ctrl_stream_cb_" + index}>
       <input type="checkbox" name="ctrl_stream_cb" id={"ctrl_stream_cb_" + index} className="mdl-checkbox__input" />
@@ -30,12 +21,10 @@ const ControlStreamSelector = () => {
     <div className="mdl-grid">
       <div className="mdl-cell mdl-cell--12-col">
         <h5>Category</h5>
-        <h6>Select which categories the content belongs to.</h6>
+        <h6>Select which categories the content belongs to</h6>
         {ctrl}
       </div>
-
     </div>
-
   );
 }
 
@@ -73,7 +62,6 @@ const ControlURLSubmit = props => {
 
 const Header = props => {
   const { title } = props;
-  // className="App-header"
   return (
     <header className="mdl-layout__header">
       <div className="mdl-layout__header-row">
@@ -90,23 +78,16 @@ const Layout = props => {
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <Header title="OpenRegistry" />
         <main className="mdl-layout__content">
-
           <div className="mdl-grid">
             <div className="mdl-layout-spacer"></div>
             <div className="mdl-cell mdl-cell--6-col">
-
               <div className="page-content">
                 <form id="form">
-
                   <ControlURLInput />
                   <ControlStreamSelector />
-
-
                   <ControlURLSubmit btn="Submit" />
-
                 </form>
               </div>
-
             </div>
             <div className="mdl-layout-spacer"></div>
           </div>
@@ -117,7 +98,6 @@ const Layout = props => {
 }
 
 class App extends React.Component {
-
   render() {
     return (
       <Layout />
