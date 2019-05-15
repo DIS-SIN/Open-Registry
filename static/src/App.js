@@ -108,14 +108,16 @@ class App extends React.Component {
 
   // Control
   handleControlChange = event => {
-    alert(`change ${event.target.value}`);
+    //alert(`change ${event.target.value}`);
     let streams = this.state.or_lat;
-    if (streams.includes(event.target.value)) {
-      streams = streams.filter(function (el) {
-        return el !== event.target.value;
-      });
-    } else {
-      streams.push(event.target.value);
+    if (event.target.type === "checkbox") {
+      if (streams.includes(event.target.value)) {
+        streams = streams.filter(function (el) {
+          return el !== event.target.value;
+        });
+      } else {
+        streams.push(event.target.value);
+      }
     }
     event.target.type === "checkbox" ?
       (
