@@ -2,13 +2,19 @@ import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 
+// Import Materialize
+import M from "materialize-css";
+
 const la_streams = [
-  { stream: "Leadership" },
-  { stream: "Design" },
-  { stream: "Data Analysis" },
   { stream: "Digital Government" },
+  { stream: "Digital Literacy" },
+  { stream: "Design" },
+  { stream: "Leadership" },
+  { stream: "Disruptive Technology" },
+  { stream: "Data Analysis" },
   { stream: "AI / ML" },
-  { stream: "DevOps" }
+  { stream: "DevOps" },
+  { stream: "Development" }
 ];
 
 // UI
@@ -35,9 +41,14 @@ const ControlURLInput = (props) => {
   const { handleControlChange, value } = props;
   return (
     <div>
-      <div className="input-field">
+      <div className="row">
         <h5><i className="material-icons">add</i> Add Content to Digital Open Learning</h5>
-        <input id="or_url" type="text" name="or_url" value={value} placeholder="Paste your content URL here." onChange={handleControlChange} />
+      </div>
+      <div className="row">
+        <div className="input-field">
+          <input id="or_url" type="text" name="or_url" value={value} placeholder="Paste your link here..." onChange={handleControlChange} />
+          <label htmlFor="or_url">Content URL</label>
+        </div>
       </div>
     </div>
   );
@@ -118,6 +129,8 @@ class App extends React.Component {
       } else {
         streams.push(event.target.value);
       }
+    } else {
+      M.updateTextFields();
     }
     event.target.type === "checkbox" ?
       (
